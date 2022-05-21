@@ -1,3 +1,5 @@
+const socket = io("localhost:8080");
+
 function HTMLActuator() {
   this.tileContainer    = document.querySelector(".tile-container");
   this.scoreContainer   = document.querySelector(".score-container");
@@ -21,6 +23,8 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
       });
     });
 
+    console.log(grid)
+    socket.emit("message", grid);
     self.updateScore(metadata.score);
     self.updateBestScore(metadata.bestScore);
 

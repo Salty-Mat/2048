@@ -70,8 +70,6 @@ GameManager.prototype.addRandomTile = function () {
   if (this.grid.cellsAvailable()) {
     var value = Math.random() < 0.9 ? 2 : 4;
     var tile = new Tile(this.grid.randomAvailableCell(), value);
-    console.log(this.grid)
-
     this.grid.insertTile(tile);
   }
 };
@@ -264,7 +262,7 @@ GameManager.prototype.tileMatchesAvailable = function () {
       }
     }
   }
-  console.log(tile);
+  //console.log(tile);
   return false;
 };
 
