@@ -297,6 +297,12 @@ hr {
     z-index: 2;
   }
 
+  .tile-containerP2 {
+    position: absolute;
+    z-index: 2;
+  }
+
+
   .tile {
     &, .tile-inner {
       width: ceil($tile-size);
