@@ -36,7 +36,14 @@ body {
 }
 
 .heading {
+  width: $field-width;
+  margin: 0 auto;
   @include clearfix;
+}
+
+.oui{
+  justify-content: center;
+  display: flex;
 }
 
 h1.title {
@@ -141,7 +148,7 @@ hr {
 }
 
 .container {
-  width: $field-width;
+
   margin: 0 auto;
 }
 
@@ -170,6 +177,8 @@ hr {
 // Game field mixin used to render CSS at different width
 @mixin game-field {
   .game-container {
+
+    margin: 50px;
     margin-top: $game-container-margin-top;
     position: relative;
     padding: $grid-spacing;
@@ -452,6 +461,8 @@ hr {
 }
 
 .above-game {
+  width: $field-width;
+  margin: 0 auto;
   @include clearfix;
 }
 
@@ -469,6 +480,8 @@ hr {
 }
 
 .game-explanation {
+  width: $field-width;
+  margin: 0 auto;
   margin-top: 50px;
 }
 
@@ -507,6 +520,8 @@ hr {
   }
 
   .heading {
+    width: $field-width;
+    margin: 0 auto;
     margin-bottom: 10px;
   }
 
