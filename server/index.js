@@ -9,16 +9,20 @@ let userCount = 0
 io.on('connection', (socket) => {
     console.log('a user connected');
     userCount++;
+    socket.broadcast.emit("connected", userCount);
+
     socket.on('disconnect', () => {
         console.log('user disconnected');
         userCount--;
     });
-
+    
     socket.on('message', (message) =>     {
         message['userCount'] = userCount;
         console.log(message);
-        io.emit('message', message);   
+        socket.broadcast.emit('message', message);
+           
     });
+    
 });
 
 

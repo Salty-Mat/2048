@@ -1,7 +1,6 @@
 
-
-function HTMLActuator() {
-  this.tileContainer    = document.querySelector(".tile-container");
+function HTMLActuatorP2() {
+  this.tileContainer    = document.querySelector(".tile-containerP2");
   this.scoreContainer   = document.querySelector(".score-container");
   this.bestContainer    = document.querySelector(".best-container");
   this.messageContainer = document.querySelector(".game-message");
@@ -10,7 +9,7 @@ function HTMLActuator() {
 }
 
 
-HTMLActuator.prototype.actuate = function (grid, metadata) {
+HTMLActuatorP2.prototype.actuate = function (grid, metadata) {
   var self = this;
 
   window.requestAnimationFrame(function () {
@@ -24,17 +23,8 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
       });
     });
 
-    socket.on("connected", function (data) {
-      console.log("connected");
-      setTimeout(function () {
-        socket.emit("message", grid);
-      }, 50);
-      
-      
 
-    })
 
-    socket.emit("message", grid);
     self.updateScore(metadata.score);
     self.updateBestScore(metadata.bestScore);
 
@@ -50,17 +40,17 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
 };
 
 // Continues the game (both restart and keep playing)
-HTMLActuator.prototype.continueGame = function () {
+HTMLActuatorP2.prototype.continueGame = function () {
   this.clearMessage();
 };
 
-HTMLActuator.prototype.clearContainer = function (container) {
+HTMLActuatorP2.prototype.clearContainer = function (container) {
   while (container.firstChild) {
     container.removeChild(container.firstChild);
   }
 };
 
-HTMLActuator.prototype.addTile = function (tile) {
+HTMLActuatorP2.prototype.addTile = function (tile) {
   var self = this;
 
   var wrapper   = document.createElement("div");
@@ -104,20 +94,20 @@ HTMLActuator.prototype.addTile = function (tile) {
   this.tileContainer.appendChild(wrapper);
 };
 
-HTMLActuator.prototype.applyClasses = function (element, classes) {
+HTMLActuatorP2.prototype.applyClasses = function (element, classes) {
   element.setAttribute("class", classes.join(" "));
 };
 
-HTMLActuator.prototype.normalizePosition = function (position) {
+HTMLActuatorP2.prototype.normalizePosition = function (position) {
   return { x: position.x + 1, y: position.y + 1 };
 };
 
-HTMLActuator.prototype.positionClass = function (position) {
+HTMLActuatorP2.prototype.positionClass = function (position) {
   position = this.normalizePosition(position);
   return "tile-position-" + position.x + "-" + position.y;
 };
 
-HTMLActuator.prototype.updateScore = function (score) {
+HTMLActuatorP2.prototype.updateScore = function (score) {
   this.clearContainer(this.scoreContainer);
 
   var difference = score - this.score;
@@ -134,11 +124,11 @@ HTMLActuator.prototype.updateScore = function (score) {
   }
 };
 
-HTMLActuator.prototype.updateBestScore = function (bestScore) {
+HTMLActuatorP2.prototype.updateBestScore = function (bestScore) {
   this.bestContainer.textContent = bestScore;
 };
 
-HTMLActuator.prototype.message = function (won) {
+HTMLActuatorP2.prototype.message = function (won) {
   var type    = won ? "game-won" : "game-over";
   var message = won ? "You win!" : "Game over!";
 
@@ -146,7 +136,7 @@ HTMLActuator.prototype.message = function (won) {
   this.messageContainer.getElementsByTagName("p")[0].textContent = message;
 };
 
-HTMLActuator.prototype.clearMessage = function () {
+HTMLActuatorP2.prototype.clearMessage = function () {
   // IE only takes one value to remove at a time.
   this.messageContainer.classList.remove("game-won");
   this.messageContainer.classList.remove("game-over");
