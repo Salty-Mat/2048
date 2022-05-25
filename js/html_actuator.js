@@ -24,16 +24,6 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
       });
     });
 
-    socket.on("connected", function (data) {
-      console.log("connected");
-      setTimeout(function () {
-        socket.emit("message", grid);
-      }, 50);
-      
-      
-
-    })
-
     socket.emit("message", grid);
     self.updateScore(metadata.score);
     self.updateBestScore(metadata.bestScore);

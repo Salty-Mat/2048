@@ -34,6 +34,7 @@ GameManager.prototype.isGameTerminated = function () {
 // Set up the game
 GameManager.prototype.setup = function () {
   var previousState = this.storageManager.getGameState();
+  const self = this
 
   // Reload the game from a previous game if present
   if (previousState) {
@@ -53,6 +54,12 @@ GameManager.prototype.setup = function () {
     // Add the initial tiles
     this.addStartTiles();
   }
+  socket.on("connected", function(data) {
+
+    console.log("Connected to server");
+    console.log(data);
+    socket.emit("message", self.grid)
+  })
 
   // Update the actuator
   this.actuate();
