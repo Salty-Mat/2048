@@ -42,12 +42,14 @@ GameManagerP2.prototype.setup = function () {
     this.over        = false;
     this.won         = false;
     this.keepPlaying = false;
-    const test = 
     // Add the initial tiles
     //this.addStartTiles();
     socket.on("message", function(data) {
-    
-      self.grid = data;
+      console.log(data);
+
+      self.over = data.metadata.over;
+      self.won = data.metadata.won;
+      self.grid = data.grid;
       self.actuate();
 
     });

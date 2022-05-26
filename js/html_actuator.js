@@ -24,7 +24,12 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
       });
     });
 
-    socket.emit("message", grid);
+ 
+
+    socket.emit("message",{    
+      grid: grid,
+      metadata: metadata
+    });
     self.updateScore(metadata.score);
     self.updateBestScore(metadata.bestScore);
 

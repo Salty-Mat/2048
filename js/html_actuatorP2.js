@@ -3,7 +3,7 @@ function HTMLActuatorP2() {
   this.tileContainer    = document.querySelector(".tile-containerP2");
   this.scoreContainer   = document.querySelector(".score-container");
   this.bestContainer    = document.querySelector(".best-container");
-  this.messageContainer = document.querySelector(".game-message");
+  this.messageContainer = document.querySelector(".game-messageP2");
 
   this.score = 0;
 }
@@ -21,6 +21,15 @@ HTMLActuatorP2.prototype.actuate = function (grid, metadata) {
           self.addTile(cell);
         }
       });
+    });
+
+    socket.io.on("error", (error) => {
+      console.log("error");
+      self.message("failled");
+    });
+
+    socket.io.on("reconnect", (attempt) => {
+      // ...
     });
 
 
@@ -129,9 +138,17 @@ HTMLActuatorP2.prototype.updateBestScore = function (bestScore) {
 };
 
 HTMLActuatorP2.prototype.message = function (won) {
-  var type    = won ? "game-won" : "game-over";
-  var message = won ? "You win!" : "Game over!";
+  var type;
+  var message;
+  if (won === "failled"){
+    console.log(won);
+    message = "can't connect to server"
+    type    = "game-over";
 
+  } else {
+  type    = won ? "game-won" : "game-over";
+   message = won ? "You win!" : "Game over!";
+  }
   this.messageContainer.classList.add(type);
   this.messageContainer.getElementsByTagName("p")[0].textContent = message;
 };
