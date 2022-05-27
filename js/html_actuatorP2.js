@@ -29,8 +29,14 @@ HTMLActuatorP2.prototype.actuate = function (grid, metadata) {
     });
 
     socket.io.on("reconnect", (attempt) => {
-      // ...
+      self.clearMessage()
     });
+
+    socket.on("dc", () => {
+      console.log("dc");
+      self.clearContainer(self.tileContainer);
+
+    })
 
 
 
