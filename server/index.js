@@ -15,14 +15,14 @@ const io = require('socket.io')(http, {
 
 let userCount = 0
 
-app.get('/count', (req, res) => {
-    res.send(userCount.toString());
-});
 
 io.on('connection', (socket) => {
     console.log('a user connected');
     userCount++;
     socket.broadcast.emit("connected", userCount);
+    app.get('/count', (req, res) => {
+        res.send(userCount.toString());
+    });
 
     socket.on('disconnect', () => {
         console.log('user disconnected');
@@ -38,6 +38,8 @@ io.on('connection', (socket) => {
     });
 
 });
+
+
 
 
 http.listen(port, () => console.log('listening on http://localhost:8080'));
