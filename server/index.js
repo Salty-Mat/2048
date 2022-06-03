@@ -1,38 +1,38 @@
-const express = require('express')
-const app = express()
-const http = require('http').createServer(app);
+const http = require('http').createServer();
 const port = 3000
-
-const cors = require('cors');
-
-app.use(cors({
-  origin: { origin: "*" }
-}));
 
 const io = require('socket.io')(http, {
     cors: { origin: "*" }
 });
 
-let userCount = 0
+let userList = [];
 
+let userCount = 0
 
 io.on('connection', (socket) => {
     console.log('a user connected');
     userCount++;
     socket.broadcast.emit("connected", userCount);
-    app.get('/count', (req, res) => {
-        res.send(userCount.toString());
-    });
-
-    socket.on('disconnect', () => {
+    
+    socket.on('disconnect', (message) => {
         console.log('user disconnected');
         io.emit('dc', userCount);
+        // remove user from userList
+        console.log(message)
+        userList = userList.filter(user => user !== message.userName);
         userCount--;
+        console.log(userList);
     });
 
-    socket.on('message', (message) => {
-        message['userCount'] = userCount;
+    socket.once('message', (message) => {
         console.log(message);
+        userList.push(message.userName);
+    })
+
+    socket.on('message', (message) => {
+        console.log(userList);
+        message['userCount'] = userCount;
+        //console.log(message);
         socket.broadcast.emit('message', message);
 
     });

@@ -59,6 +59,7 @@ GameManager.prototype.setup = function () {
     console.log("Connected to server");
     console.log(data);
     socket.emit("message", {
+      userName: userName,
       grid: self.grid,
       metadata: {
         score:      self.score,
@@ -68,6 +69,10 @@ GameManager.prototype.setup = function () {
         terminated: self.isGameTerminated()
       }
     })
+
+
+
+
   })
 
   // Update the actuator

@@ -26,7 +26,8 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
 
  
 
-    socket.emit("message",{    
+    socket.emit("message",{  
+      userName: userName,  
       grid: grid,
       metadata: metadata
     });
