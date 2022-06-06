@@ -16,10 +16,10 @@ io.on('connection', (socket) => {
     
     socket.on('disconnect', (message) => {
         console.log('user disconnected');
+        console.log(socket)
         io.emit('dc', userCount);
-        // remove user from userList
-        console.log(message)
-        userList = userList.filter(user => user !== message.userName);
+        // var i = userList.indexOf(socket);
+        // userList.splice(i, 1);
         userCount--;
         console.log(userList);
     });
