@@ -24,10 +24,13 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
       });
     });
 
- 
+    console.log(socket.id)
 
     socket.emit("message",{  
-      userName: userName,  
+      user: {
+        userName: userName,
+        ID: socket.id
+      },  
       grid: grid,
       metadata: metadata
     });

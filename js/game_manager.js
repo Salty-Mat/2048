@@ -55,11 +55,15 @@ GameManager.prototype.setup = function () {
     this.addStartTiles();
   }
   socket.on("connected", function(data) {
+    console.log(socket.id)
 
     console.log("Connected to server");
     console.log(data);
     socket.emit("message", {
-      userName: userName,
+      user: {
+        userName: userName,
+        ID: socket.id
+      },
       grid: self.grid,
       metadata: {
         score:      self.score,

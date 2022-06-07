@@ -16,23 +16,26 @@ io.on('connection', (socket) => {
     
     socket.on('disconnect', (message) => {
         console.log('user disconnected');
-        console.log(socket)
         io.emit('dc', userCount);
-        // var i = userList.indexOf(socket);
-        // userList.splice(i, 1);
+        //remove user from userList from ID
+        userList = userList.filter(user => user.ID !== socket.id);
         userCount--;
         console.log(userList);
     });
 
     socket.once('message', (message) => {
         console.log(message);
-        userList.push(message.userName);
+        userList.push(message.user);
     })
 
     socket.on('message', (message) => {
-        console.log(userList);
+        //console.log(socket.id)
+        //console.log(userList);
+        //find the index of the user in the userList
+        let userIndex = userList.findIndex(user => user.ID === socket.id);
+        console.log(userList.userName[message.user.userName])
         message['userCount'] = userCount;
-        //console.log(message);
+        console.log(message);
         socket.broadcast.emit('message', message);
 
     });
