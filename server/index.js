@@ -30,10 +30,10 @@ io.on('connection', (socket) => {
 
     socket.on('message', (message) => {
         //console.log(socket.id)
-        //console.log(userList);
+        console.log(userList);
         //find the index of the user in the userList
         let userIndex = userList.findIndex(user => user.ID === socket.id);
-        console.log(userList.userName[message.user.userName])
+        userList[userIndex] = message.user;
         message['userCount'] = userCount;
         console.log(message);
         socket.broadcast.emit('message', message);
