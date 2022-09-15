@@ -16,7 +16,6 @@ function GameManagerP2(size, Actuator, StorageManager) {
 
 // Restart the game
 GameManagerP2.prototype.restart = function () {
-  this.storageManager.clearGameState();
   this.actuator.continueGame(); // Clear the game won/lost message
   this.setup();
 };
@@ -82,12 +81,10 @@ GameManagerP2.prototype.actuate = function () {
   //   this.storageManager.setBestScore(this.score);
   // }
 
-  // //Clear the state when the game is over (game over only, not win)
-  // if (this.over) {
-  //   this.storageManager.clearGameState();
-  // } else {
-  //   this.storageManager.setGameState(this.serialize());
-  // }
+  //Clear the- state when the game is over (game over only, not win)
+  if (this.over) {
+    this.storageManager.clearGameState();
+  } 
 
   this.actuator.actuate(this.grid, {
     score:      this.score,
@@ -96,6 +93,7 @@ GameManagerP2.prototype.actuate = function () {
     bestScore:  this.storageManager.getBestScore(),
     terminated: this.isGameTerminated()
   });
+  console.log(this.terminated)
 
 };
 

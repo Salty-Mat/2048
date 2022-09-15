@@ -23,6 +23,10 @@ HTMLActuatorP2.prototype.actuate = function (grid, metadata) {
       });
     });
 
+    if (metadata.terminated == false){
+      self.clearMessage()
+    }
+
     socket.io.on("error", (error) => {
       console.log("error");
       self.message("failled");

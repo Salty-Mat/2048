@@ -4,7 +4,7 @@ let userName = "guest";
 
 
 window.requestAnimationFrame(function () {
-  userName = prompt("Enter your name: ");
+  //userName = prompt("Enter your name: ");
   
   new GameManager(4, KeyboardInputManager, HTMLActuator, LocalStorageManager);
   new GameManagerP2(4, HTMLActuatorP2, LocalStorageManager);

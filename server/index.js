@@ -29,14 +29,53 @@ io.on('connection', (socket) => {
     })
 
     socket.on('message', (message) => {
+
+        if (userList[0] === message.user || Object.keys(userList[0]).length == 1){
+            userList[0] = message.user
+        } else if(userList[1] === message.user || Object.keys(userList[1]).length == 1){
+            userList[1] = message.user
+        } else {
+            if(userList.length == 0){
+                userList[0] = message.user
+            } else if (userList.length == 1) {
+                userList[1] = message.user
+            }
+        }
+        console.log(userList)
+
+        //let userIndex = userList.findIndex(user => message.user.ID);
+
+        // console.log(userIndex, userList, message.user)
+        
+        // if (userIndex == -1){
+        //     userList.push(message.user);
+        // }
+
+        
+        // for (var i = 0; i < userCount; i++){
+            // console.log(message.user)
+            // if(!userList[i]){
+            //     console.log(!(userList[i]))
+            //     if (userList[i].length == 2){D
+            //         if (userList[i].ID == message.User.ID){
+
+                        
+            //         }
+            //     }
+                
+                
+            // }
+            // console.log(userList)
+
+        // }
         //console.log(socket.id)
-        console.log(userList);
+        // console.log(userList);
         //find the index of the user in the userList
         //let userIndex = userList.findIndex(user => user.userName);
         //console.log(userIndex)
         //userList[userIndex] = message.user;
         message['userCount'] = userCount;
-        console.log(message);
+        // console.log(message);
         socket.broadcast.emit('message', message);
 
     });
