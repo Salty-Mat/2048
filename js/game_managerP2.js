@@ -44,7 +44,7 @@ GameManagerP2.prototype.setup = function () {
     // Add the initial tiles
     //this.addStartTiles();
     socket.on("message", function(data) {
-      console.log(data);
+      //console.log(data);
 
       self.over = data.metadata.over;
       self.won = data.metadata.won;
@@ -93,7 +93,7 @@ GameManagerP2.prototype.actuate = function () {
     bestScore:  this.storageManager.getBestScore(),
     terminated: this.isGameTerminated()
   });
-  console.log(this.terminated)
+  //console.log(this.terminated)
 
 };
 

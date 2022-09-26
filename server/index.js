@@ -1,6 +1,8 @@
 const http = require('http').createServer();
 const port = 3000
 
+require( 'console-stamp' )( console );
+
 const io = require('socket.io')(http, {
     cors: { origin: "*" }
 });
@@ -23,78 +25,25 @@ io.on('connection', (socket) => {
         console.log(userList);
     });
 
-    socket.once('message', (message) => {
-        // console.log(message);
-        // if (userList.length == 0){
-        //     userList[0] = message.user
-        // } else if (userList.length == 1){
-        //     userList[1] = message.user
-        // }
-    })
-
     socket.on('message', (message) => {
+        if(Object.keys(message.user).length == 1) return;
+        console.log(userCount)
         if(userCount == 1){
             userList.push(message.user)
         } else if (userCount == 2){
-            const indexnum = userList.indexOf(message.user)
-            console.log(userList, message.user)
+            const indexnum = userList.map(e =>e.ID ).indexOf(message.user.ID);
             console.log(indexnum)
+            //const indexnum = userList.indexOf(message.user.ID)
+            //console.log(userList, message.user)
+           // console.log(indexnum)
             if ( indexnum == -1 ){
                 userList.push(message.user)
-                console.log(message)
+                //console.log(message)
             }
 
         }
-        //console.log(userList)
+        console.log(userList)
 
-
-        // if (userList[0] == undefined || userList[1] == undefined) return;
-        // if (userList[0] === message.user || Object.keys(userList[0]).length == 1){
-        //     userList[0] = message.user
-        // } else if(userList[1] === message.user || Object.keys(userList[1]).length == 1){
-        //     userList[1] = message.user
-        // } else if (userList[0].ID == userList[1].ID){
-        //     userList.pop()
-        // } else {
-        //     if(userList.length == 0){
-        //         userList[0] = message.user
-        //     } else if (userList.length == 1) {
-        //         userList[1] = message.user
-        //     }
-        // }
-        //console.log(userList)
-
-        //let userIndex = userList.findIndex(user => message.user.ID);
-
-        // console.log(userIndex, userList, message.user)
-        
-        // if (userIndex == -1){
-        //     userList.push(message.user);
-        // }
-
-        
-        // for (var i = 0; i < userCount; i++){
-            // console.log(message.user)
-            // if(!userList[i]){
-            //     console.log(!(userList[i]))
-            //     if (userList[i].length == 2){D
-            //         if (userList[i].ID == message.User.ID){
-
-                        
-            //         }
-            //     }
-                
-                
-            // }
-            // console.log(userList)
-
-        // }
-        //console.log(socket.id)
-        // console.log(userList);
-        //find the index of the user in the userList
-        //let userIndex = userList.findIndex(user => user.userName);
-        //console.log(userIndex)
-        //userList[userIndex] = message.user;
         message['userCount'] = userCount;
         // console.log(message);
         socket.broadcast.emit('message', message);
