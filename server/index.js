@@ -24,24 +24,45 @@ io.on('connection', (socket) => {
     });
 
     socket.once('message', (message) => {
-        console.log(message);
-        userList.push(message.user);
+        // console.log(message);
+        // if (userList.length == 0){
+        //     userList[0] = message.user
+        // } else if (userList.length == 1){
+        //     userList[1] = message.user
+        // }
     })
 
     socket.on('message', (message) => {
-
-        if (userList[0] === message.user || Object.keys(userList[0]).length == 1){
-            userList[0] = message.user
-        } else if(userList[1] === message.user || Object.keys(userList[1]).length == 1){
-            userList[1] = message.user
-        } else {
-            if(userList.length == 0){
-                userList[0] = message.user
-            } else if (userList.length == 1) {
-                userList[1] = message.user
+        if(userCount == 1){
+            userList.push(message.user)
+        } else if (userCount == 2){
+            const indexnum = userList.indexOf(message.user)
+            console.log(userList, message.user)
+            console.log(indexnum)
+            if ( indexnum == -1 ){
+                userList.push(message.user)
+                console.log(message)
             }
+
         }
-        console.log(userList)
+        //console.log(userList)
+
+
+        // if (userList[0] == undefined || userList[1] == undefined) return;
+        // if (userList[0] === message.user || Object.keys(userList[0]).length == 1){
+        //     userList[0] = message.user
+        // } else if(userList[1] === message.user || Object.keys(userList[1]).length == 1){
+        //     userList[1] = message.user
+        // } else if (userList[0].ID == userList[1].ID){
+        //     userList.pop()
+        // } else {
+        //     if(userList.length == 0){
+        //         userList[0] = message.user
+        //     } else if (userList.length == 1) {
+        //         userList[1] = message.user
+        //     }
+        // }
+        //console.log(userList)
 
         //let userIndex = userList.findIndex(user => message.user.ID);
 
