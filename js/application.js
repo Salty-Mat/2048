@@ -1,7 +1,7 @@
 // Wait till the browser is ready to render the game (avoids glitches)
-//const socket = io("ws://localhost:3000")
-const ip = prompt("endter ip")
-const socket = io(ip);
+const socket = io("ws://localhost:3000")
+//const ip = prompt("endter ip")
+//const socket = io(ip);
 let userName = "guest";
 
 

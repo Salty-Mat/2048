@@ -4,6 +4,7 @@ const port = 3000
 require( 'console-stamp' )( console );
 
 const io = require('socket.io')(http, {
+    rejectUnauthorized: false,
     cors: { origin: "*" }
 });
 
