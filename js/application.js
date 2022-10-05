@@ -1,5 +1,6 @@
 // Wait till the browser is ready to render the game (avoids glitches)
-const socket = io("https://salty-mat-2048-7w5xp7g4p4fx6q9-3000.githubpreview.dev/")
+// const socket = io("https://salty-mat-2048-7w5xp7g4p4fx6q9-3000.githubpreview.dev/")
+const socket = io("localhost:3000")
 //const ip = prompt("endter ip")
 //const socket = io(ip);
 let userName = "guest";

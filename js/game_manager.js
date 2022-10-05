@@ -36,6 +36,8 @@ GameManager.prototype.setup = function () {
   var previousState = this.storageManager.getGameState();
   const self = this
 
+  this.actuator.name.textContent = userName
+
   // Reload the game from a previous game if present
   if (previousState) {
     this.grid        = new Grid(previousState.grid.size,

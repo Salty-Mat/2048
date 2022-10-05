@@ -5,6 +5,7 @@ function HTMLActuator() {
   this.scoreContainer   = document.querySelector(".score-container");
   this.bestContainer    = document.querySelector(".best-container");
   this.messageContainer = document.querySelector(".game-message");
+  this.name = document.querySelector(".name1");
 
   this.score = 0;
 }
@@ -23,6 +24,8 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
         }
       });
     });
+    
+    //self.name.textContent = "brun"
 
     console.log(socket.id)
 

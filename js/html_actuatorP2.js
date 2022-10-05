@@ -4,6 +4,7 @@ function HTMLActuatorP2() {
   this.scoreContainer   = document.querySelector(".score-container");
   this.bestContainer    = document.querySelector(".best-container");
   this.messageContainer = document.querySelector(".game-messageP2");
+  this.name = document.querySelector(".name2");
 
   this.score = 0;
 }

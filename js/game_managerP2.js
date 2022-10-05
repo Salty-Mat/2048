@@ -34,6 +34,8 @@ GameManagerP2.prototype.isGameTerminated = function () {
 // Set up the game
 GameManagerP2.prototype.setup = function () {
   const self = this;
+  
+  //this.actuator.name.textContent = userNamex
   var previousState = this.storageManager.getGameState();
 
     this.grid        = new Grid(this.size);
@@ -50,6 +52,7 @@ GameManagerP2.prototype.setup = function () {
       self.won = data.metadata.won;
       self.grid = data.grid;
       self.actuate();
+      self.actuator.name.textContent = data.user.userName
 
     });
 
